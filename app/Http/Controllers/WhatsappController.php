@@ -15,9 +15,29 @@ class WhatsappController extends Controller
         ])->post(
             'https://api.zuwinda.com/v1.2/message/whatsapp/send-text',
             [
-                'type' => 'PREMIUM', // CHEAP, PREMIUM or VIP
+                'instances_id' => 'Your instances id',
                 'to' => 'xxxxxxxxxx',
-                'content' => 'Hello world !'
+                'content' => 'Hello world !',
+            ]
+        );
+
+        $response = $res->object();
+
+        return response()->json($response);
+    }
+
+    public function sendTextSchedule()
+    {
+        $res = Http::withHeaders([
+            'x-access-key' => env('ZUWINDA_API_TOKEN')
+        ])->post(
+            'https://api.zuwinda.com/v1.2/message/whatsapp/send-text',
+            [
+                'instances_id' => 'Your instances id',
+                'to' => 'xxxxxxxxxx',
+                'content' => 'Hello world !',
+                'date' => '2024-01-14',
+                'time' => '18:00'
             ]
         );
 
